@@ -15,13 +15,6 @@ class Scene1 extends Phaser.Scene {
         this.JUMP_VELOCITY = -950;
         this.physics.world.gravity.y = 3000;
 
-    
-       
-
-
-        
-    
-
         // make ground tiles group
         this.ground = this.add.group();
         // Ground Floor
@@ -32,7 +25,7 @@ class Scene1 extends Phaser.Scene {
             this.ground.add(groundTile);
         }
 
-        let stop = this.physics.add.sprite(tileSize*22, game.config.height - tileSize*2, 'groundTile').setScale(SCALE).setOrigin(0);
+        let stop = this.physics.add.sprite(browserWidth * 0.9, game.config.height - tileSize*2, 'groundTile').setScale(SCALE).setOrigin(0);
         stop.body.immovable = true;
         stop.body.allowGravity = false;
         this.ground.add(stop);
@@ -40,7 +33,7 @@ class Scene1 extends Phaser.Scene {
 
 
         // set up doors
-        this.blueDoor = this.physics.add.sprite(tileSize*21, game.config.height - tileSize*2.8, 'blueDoor').setScale(SCALE).setOrigin(0);
+        this.blueDoor = this.physics.add.sprite(browserWidth * 0.85, game.config.height - tileSize*2.8, 'blueDoor').setScale(SCALE).setOrigin(0);
         this.blueDoor.body.allowGravity = false;
         this.blueDoor.body.immovable = true;
 
@@ -74,14 +67,6 @@ class Scene1 extends Phaser.Scene {
      
 
         //slugl movements
-
-      
-
-
-
-
-
-
     }
 
     changeSprite(waterBoy, collidedObject) {
