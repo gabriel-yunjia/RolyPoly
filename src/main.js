@@ -6,12 +6,14 @@ let keys;
 let currentScene = 0;
 const SCALE = 0.5;
 const tileSize = 35;
+var browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+var browserHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
 // main game object
 let config = {
     type: Phaser.WEBGL,
-    width: 840,
-    height: 525,
+    width: browserWidth,
+    height: browserHeight,
     physics: {
         default: 'arcade',
         arcade: {
