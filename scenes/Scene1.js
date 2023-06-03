@@ -9,11 +9,11 @@ class Scene1 extends Phaser.Scene {
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D,UP,LEFT, RIGHT");
         this.ACCELERATION = 999999;
-        this.MAX_X_VEL = 250;   // pixels/second
-        this.MAX_Y_VEL = 5000;
+        this.MAX_X_VEL = browserWidth / 4.5;   // pixels/second
+        this.MAX_Y_VEL = browserHeight * 1.5;
      
         this.JUMP_VELOCITY = -950;
-        this.physics.world.gravity.y = 3000;
+        this.physics.world.gravity.y = 2000;
 
         // make ground tiles group
         this.ground = this.add.group();
@@ -25,12 +25,10 @@ class Scene1 extends Phaser.Scene {
             this.ground.add(groundTile);
         }
 
-        let stop = this.physics.add.sprite(browserWidth * 0.9, game.config.height - tileSize*2, 'groundTile').setScale(SCALE).setOrigin(0);
+        let stop = this.physics.add.sprite(browserWidth * 0.9, game.config.height* 0.9, 'groundTile').setScale(SCALE).setOrigin(0);
         stop.body.immovable = true;
         stop.body.allowGravity = false;
         this.ground.add(stop);
-
-
 
         // set up doors
         this.blueDoor = this.physics.add.sprite(browserWidth * 0.85, game.config.height - tileSize*2.8, 'blueDoor').setScale(SCALE).setOrigin(0);
@@ -39,23 +37,33 @@ class Scene1 extends Phaser.Scene {
 
         // set up physics with players and doors
 
-        
-
-        
-
         // set up Main Characters 
-        this.waterBoy = this.physics.add.sprite(tileSize*4, game.config.height - tileSize*2, 'waterBoy').setScale(SCALE);
+        this.waterBoy = this.physics.add.sprite(game.config.width* 0.1, game.config.height * 0.75, 'waterBoy');
         this.waterBoy.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
         this.waterBoy.setCollideWorldBounds(true);
 
-        this.slug = this.physics.add.sprite(game.config.width - tileSize*4, game.config.height - tileSize*2, 'fireGirl').setScale(SCALE);
-        this.slug.setMaxVelocity(this.MAX_X_VEL/3, this.MAX_Y_VEL);
+        this.slug = this.physics.add.sprite(game.config.width * 0.5, game.config.height * 0.75, 'fireGirl');
+        this.slug.setMaxVelocity(this.MAX_X_VEL / 3, this.MAX_Y_VEL);
         this.slug.setCollideWorldBounds(false);
 
-        this.slug2 = this.physics.add.sprite(game.config.width - tileSize*10, game.config.height - tileSize*2, 'fireGirl').setScale(SCALE);
-        this.slug2.setMaxVelocity(this.MAX_X_VEL/3, this.MAX_Y_VEL);
+        this.slug2 = this.physics.add.sprite(game.config.width * 0.8, game.config.height * 0.75, 'fireGirl');
+        this.slug2.setMaxVelocity(this.MAX_X_VEL / 3, this.MAX_Y_VEL);
         this.slug2.setCollideWorldBounds(false);
-        
+
+        // Calculate the scale factors based on screen size and desired ratio
+        var scaleX = game.config.width / 249;
+        var scaleY = game.config.height / 129;
+        var scale = Math.min(scaleX, scaleY) * 0.1;
+
+        this.waterBoy.setScale(scale) * 0.1;
+
+        var SlugscaleX = game.config.width / 340;
+        var SlugscaleY = game.config.height / 383;
+        var Slugscale = Math.min(SlugscaleX, SlugscaleY) * 0.1;
+
+        this.slug.setScale(Slugscale);
+        this.slug2.setScale(Slugscale);
+
 
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
