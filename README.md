@@ -5,3 +5,5 @@ Our sub group worked on this portion of the assignment, the other groups did the
 
 Jeevithan Mahenthran, Nguyen Vu, Gabriel Yunjia
 
+S8 changes:
+We fixed our screen sometimes being too big and made it smaller and centered it so it should fit every screen size, reduced slug speed, removed air jumping, as well as making it harder to reach the door
