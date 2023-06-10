@@ -8,7 +8,8 @@ const SCALE = 0.5;
 const tileSize = 35;
 var browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 var browserHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
+browserWidth *= 0.95;
+browserHeight *= 0.95;
 // main game object
 let config = {
     type: Phaser.WEBGL,
@@ -24,7 +25,9 @@ let config = {
             }
         }
     },
-    scene: [Load, Scene1]
+    scene: [Load, Scene1],
+    scale: {autoCenter: Phaser.Scale.CENTER_BOTH}
 };
 
 let game = new Phaser.Game(config);
+

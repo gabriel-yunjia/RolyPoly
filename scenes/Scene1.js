@@ -5,6 +5,7 @@ class Scene1 extends Phaser.Scene {
     waterBoy;
     gameEnded = false;
     create() {
+        
         // variables and settings
 
         this.keys = this.input.keyboard.addKeys("W,A,S,D,UP,LEFT, RIGHT");
@@ -25,13 +26,20 @@ class Scene1 extends Phaser.Scene {
             this.ground.add(groundTile);
         }
 
-        let stop = this.physics.add.sprite(browserWidth * 0.9, game.config.height* 0.9, 'groundTile').setScale(SCALE).setOrigin(0);
+        for(let i = 0; i < 5; i += 1) {
+            let groundTile = this.physics.add.sprite(i*tileSize + browserWidth * 0.88, game.config.height * 0.7, 'groundTile').setScale(SCALE).setOrigin(0);
+            groundTile.body.immovable = true;
+            groundTile.body.allowGravity = false;
+            this.ground.add(groundTile);
+        }
+
+        let stop = this.physics.add.sprite(browserWidth * 0.98, game.config.height* 0.65, 'groundTile').setScale(SCALE).setOrigin(0);
         stop.body.immovable = true;
         stop.body.allowGravity = false;
         this.ground.add(stop);
 
         // set up doors
-        this.blueDoor = this.physics.add.sprite(browserWidth * 0.85, game.config.height - tileSize*2.8, 'blueDoor').setScale(SCALE).setOrigin(0);
+        this.blueDoor = this.physics.add.sprite(browserWidth * 0.955, game.config.height * 0.61, 'blueDoor').setScale(SCALE).setOrigin(0);
         this.blueDoor.body.allowGravity = false;
         this.blueDoor.body.immovable = true;
 
@@ -43,11 +51,11 @@ class Scene1 extends Phaser.Scene {
         this.waterBoy.setCollideWorldBounds(true);
 
         this.slug = this.physics.add.sprite(game.config.width * 0.5, game.config.height * 0.75, 'fireGirl');
-        this.slug.setMaxVelocity(this.MAX_X_VEL / 3, this.MAX_Y_VEL);
+        this.slug.setMaxVelocity(this.MAX_X_VEL / 5, this.MAX_Y_VEL);
         this.slug.setCollideWorldBounds(false);
 
         this.slug2 = this.physics.add.sprite(game.config.width * 0.8, game.config.height * 0.75, 'fireGirl');
-        this.slug2.setMaxVelocity(this.MAX_X_VEL / 3, this.MAX_Y_VEL);
+        this.slug2.setMaxVelocity(this.MAX_X_VEL / 5, this.MAX_Y_VEL);
         this.slug2.setCollideWorldBounds(false);
 
         // Calculate the scale factors based on screen size and desired ratio
@@ -130,20 +138,14 @@ class Scene1 extends Phaser.Scene {
         this.slug2.body.setAccelerationX(-this.ACCELERATION/2);
         this.waterBoy.body.setAccelerationX(this.ACCELERATION/2)
 
-
-        
         this.input.on('pointerdown', () => {
-            
-                this.waterBoy.body.setVelocityY(this.JUMP_VELOCITY);
-            
+            if (this.waterBoy.body.touching.down) {
+              this.waterBoy.body.setVelocityY(this.JUMP_VELOCITY);
+            }
         });
-
-
-
-  
+          
         if(this.waterBoy.body.touching.down && this.keys.UP.isDown) {
             this.waterBoy.body.setVelocityY(this.JUMP_VELOCITY);
-
         }
 
     
